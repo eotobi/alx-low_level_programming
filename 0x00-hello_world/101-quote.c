@@ -3,10 +3,8 @@
 /**
  * main - Entry point
  *
- * filedes is of type int
- *
- * buf is of type character
- *
+ * Description: filedes is of type integer,
+ * buf is of type character,
  * nbyte is of type insigned integer
  *
  * Return: Always 1 (Success)
