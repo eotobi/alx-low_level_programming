@@ -2,7 +2,6 @@
 
 /**
 * _isalpha - a function that checks for alphabetic character
-* 
 * @n: single letter input
 * Return: 1 if n is a letter (lower or uppercase), otherwise returns 0
 */
