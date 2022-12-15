@@ -5,7 +5,7 @@
 * @abn: integer input absolute number
 * Return: absolute number of abn
 */
-int _abs(int ab)
+int _abs(int abn)
 {
 	return (abn * ((abn > 0) - (abn < 0)));
 
