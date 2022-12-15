@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
 * main - Entry point
@@ -12,9 +12,9 @@ int main(void)
 
 	while (*sh)
 	{
-		putchar(*sh);
+		_putchar(*sh);
 		sh++;
 	}
-	putchar('\n');
+	_putchar('\n');
 	return (0);
 }
