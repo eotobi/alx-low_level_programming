@@ -3,22 +3,22 @@
 
 /**
  * main - main block
- * Description: Find and print the largest prime factor of the number
- * 612852475143
+ * Description: Find and print the largest prime factor of the number 612852475143
  * Return: 0
  */
-int main (void)
+int main(void)
 {
-	int c;
-	long num = 612852475143;
+	long x, maxf;
+	long number = 612852475143;
+	double square = sqrt(number);
 
-	for (c = (int) sqrt(num); c > 2; c++)
+	for (x = 1; x <= square; x++)
 	{
-		if (num % c == 0)
+		if (number % x == 0)
 		{
-			printf("%d\n", c);
-			break;
+			maxf = number / x;
 		}
 	}
+	printf("%ld\n", maxf);
 	return (0);
 }
