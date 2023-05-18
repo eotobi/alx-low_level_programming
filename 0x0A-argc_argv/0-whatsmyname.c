@@ -1,25 +1,23 @@
 #include <stdio.h>
-#include <string.h>
 
 /**
- * main - Entry point of the program
- * @argc: Number of command line arguments
- * @argv: Array containing the command line arguments
+ * main - program that prints its name
+ * @argc: argument count
+ * @argv: argunment vector
  *
- * Return: 0 on success
+ * Return: int
  */
+
 int main(int argc, char *argv[])
 {
-    /* Extract the program name from the provided path */
-    char *programName = strrchr(argv[0], '/');
+int count;
 
-    if (programName == NULL)
-        programName = argv[0];
-    else
-        programName++;
-
-    /* Print the program name */
-    printf("%s\n", programName);
-
-    return 0;
+for (count = 0; count < argc; count++)
+{
+if (argc == 1)
+printf("%s\n", argv[count]);
+else
+break;
+}
+return (0);
 }
