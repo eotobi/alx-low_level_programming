@@ -655,3 +655,56 @@ Please note that these comments follow the general guidelines of the Betty style
 
 Once you have made the necessary adjustments, you can proceed to the next steps to compile the source file into a dynamic library and use it in Python.
 
+Based on the provided information and restrictions, we can leverage the LD_PRELOAD environment variable to inject our custom shared library and manipulate the behavior of the gm program. Here's a solution that meets the requirements:
+
+Step 1: Create the shared library source code
+Create a C source file, for example, gm_hack.c, with the following content:
+
+c
+Copy code
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * rand - Override the rand() function to always return the winning numbers
+ */
+int rand(void)
+{
+    return 9;
+}
+This code overrides the rand() function used by the gm program and forces it to always return the number 9. Modify this code accordingly if you need different winning numbers.
+
+Step 2: Compile the shared library
+Compile the gm_hack.c file into a shared library using the following command:
+
+bash
+Copy code
+gcc -shared -o gm_hack.so gm_hack.c
+Step 3: Create the shell script
+Create a shell script, for example, 101-make_me_win.sh, with the following content:
+
+bash
+Copy code
+#!/bin/bash
+cp gm gm_original
+export LD_PRELOAD=./gm_hack.so
+This script makes a backup of the original gm program and sets the LD_PRELOAD environment variable to inject our shared library (gm_hack.so) before running the gm program.
+
+Step 4: Prepare for execution
+Make sure both the 101-make_me_win.sh shell script and the compiled gm_hack.so shared library are in the same directory as the gm program.
+
+Step 5: Execute the shell script
+Provide the 101-make_me_win.sh script to the mole, and they should run it on the server as follows:
+
+bash
+Copy code
+mss@gm_server$ . ./101-make_me_win.sh
+This sets up the environment with the shared library injection.
+
+Step 6: Wait for execution
+Wait for the mole to run the script 98 seconds before MSS runs the gm program with your numbers.
+
+Step 7: Win the Jackpot!
+If everything goes according to plan, the modified rand() function will force the gm program to always select the number 9 as the winning number. You should see the desired outcome and win the Jackpot!
+
+Note: This solution exploits the specific scenario provided and should not be used for any malicious purposes.
