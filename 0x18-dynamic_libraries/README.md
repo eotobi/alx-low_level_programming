@@ -189,3 +189,469 @@ Repo:
 GitHub repository: alx-low_level_programming
 Directory: 0x18-dynamic_libraries
 File: 1-create_dynamic_lib.sh
+how do I Create the dynamic library libdynamic.so containing all the functions listed below:
+
+int _putchar(char c);
+int _islower(int c);
+int _isalpha(int c);
+int _abs(int n);
+int _isupper(int c);
+int _isdigit(int c);
+int _strlen(char *s);
+void _puts(char *s);
+char *_strcpy(char *dest, char *src);
+int _atoi(char *s);
+char *_strcat(char *dest, char *src);
+char *_strncat(char *dest, char *src, int n);
+char *_strncpy(char *dest, char *src, int n);
+int _strcmp(char *s1, char *s2);
+char *_memset(char *s, char b, unsigned int n);
+char *_memcpy(char *dest, char *src, unsigned int n);
+char *_strchr(char *s, char c);
+unsigned int _strspn(char *s, char *accept);
+char *_strpbrk(char *s, char *accept);
+char *_strstr(char *haystack, char *needle);
+
+ChatGPT
+To create the dynamic library libdynamic.so containing the listed functions, you'll need to follow these steps:
+
+Step 1: Implement the functions in a source file
+Create a C source file, for example, dynamic.c, and implement the functions mentioned in the question. Here's an example implementation:
+
+c
+Copy code
+#include <unistd.h>
+
+int _putchar(char c) {
+    return write(1, &c, 1);
+}
+
+int _islower(int c) {
+    return (c >= 'a' && c <= 'z');
+}
+
+int _isalpha(int c) {
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
+
+int _abs(int n) {
+    return (n < 0) ? -n : n;
+}
+
+int _isupper(int c) {
+    return (c >= 'A' && c <= 'Z');
+}
+
+int _isdigit(int c) {
+    return (c >= '0' && c <= '9');
+}
+
+int _strlen(char *s) {
+    int length = 0;
+    while (*s) {
+        length++;
+        s++;
+    }
+    return length;
+}
+
+void _puts(char *s) {
+    while (*s) {
+        _putchar(*s);
+        s++;
+    }
+}
+
+char *_strcpy(char *dest, char *src) {
+    char *start = dest;
+    while (*src) {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';
+    return start;
+}
+
+int _atoi(char *s) {
+    int result = 0;
+    int sign = 1;
+    if (*s == '-') {
+        sign = -1;
+        s++;
+    }
+    while (*s) {
+        result = result * 10 + (*s - '0');
+        s++;
+    }
+    return sign * result;
+}
+
+char *_strcat(char *dest, char *src) {
+    char *start = dest;
+    while (*dest) {
+        dest++;
+    }
+    while (*src) {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';
+    return start;
+}
+
+char *_strncat(char *dest, char *src, int n) {
+    char *start = dest;
+    while (*dest) {
+        dest++;
+    }
+    while (*src && n > 0) {
+        *dest = *src;
+        dest++;
+        src++;
+        n--;
+    }
+    *dest = '\0';
+    return start;
+}
+
+char *_strncpy(char *dest, char *src, int n) {
+    char *start = dest;
+    while (*src && n > 0) {
+        *dest = *src;
+        dest++;
+        src++;
+        n--;
+    }
+    while (n > 0) {
+        *dest = '\0';
+        dest++;
+        n--;
+    }
+    return start;
+}
+
+int _strcmp(char *s1, char *s2) {
+    while (*s1 && (*s1 == *s2)) {
+        s1++;
+        s2++;
+    }
+    return *(unsigned char *)s1 - *(unsigned char *)s2;
+}
+
+char *_memset(char *s, char b, unsigned int n) {
+    char *start = s;
+    while (n > 0) {
+        *s = b;
+        s++;
+        n--;
+    }
+    return start;
+}
+
+char *_memcpy(char *dest, char *src, unsigned int n) {
+    char *start = dest;
+    while (n > 0) {
+        *dest = *
+
+
+
+
+User
+continue
+
+ChatGPT
+Certainly! Apologies for the incomplete response. Here's the continuation:
+
+c
+Copy code
+    dest = src;
+    dest++;
+    src++;
+    n--;
+}
+return start;
+}
+
+char *_strchr(char *s, char c) {
+    while (*s) {
+        if (*s == c) {
+            return s;
+        }
+        s++;
+    }
+    if (*s == c) {
+        return s;
+    }
+    return NULL;
+}
+
+unsigned int _strspn(char *s, char *accept) {
+    unsigned int count = 0;
+    while (*s && _strchr(accept, *s)) {
+        count++;
+        s++;
+    }
+    return count;
+}
+
+char *_strpbrk(char *s, char *accept) {
+    while (*s) {
+        if (_strchr(accept, *s)) {
+            return s;
+        }
+        s++;
+    }
+    return NULL;
+}
+
+char *_strstr(char *haystack, char *needle) {
+    while (*haystack) {
+        char *h = haystack;
+        char *n = needle;
+        while (*h && *n && (*h == *n)) {
+            h++;
+            n++;
+        }
+        if (!*n) {
+            return haystack;
+        }
+        haystack++;
+    }
+    return NULL;
+}
+Step 2: Compile the source file into a dynamic library
+To compile the source file dynamic.c into a dynamic library libdynamic.so, use the following command:
+
+csharp
+Copy code
+gcc -shared -o libdynamic.so dynamic.c
+Make sure you have the necessary development libraries installed on your system, and adjust the command if needed (e.g., adding compiler flags or library paths).
+
+After successful compilation, you should have the libdynamic.so dynamic library file.
+
+Note: The above steps assume you are using a Linux or Unix-like system. The process may differ slightly for other operating systems.
+
+That's it! You have now created the dynamic library libdynamic.so containing the listed functions. You can link this library to your programs that require these functions by specifying the library during the compilation process.
+
+
+
+
+
+User
+gcc -shared -o libdynamic.so dynamic.c
+dynamic.c: In function ‘_memcpy’:
+dynamic.c:135:10: warning: assignment to ‘char’ from ‘char *’ makes integer from pointer without a cast [-Wint-conversion]
+  135 |     dest = src;
+      |          ^
+
+ChatGPT
+Apologies for the mistake in the code. The warning you received is because of an incorrect assignment in the _memcpy function. Here's the corrected version of the _memcpy function:
+
+c
+Copy code
+char *_memcpy(char *dest, char *src, unsigned int n) {
+    char *start = dest;
+    while (n > 0) {
+        *dest = *src;
+        dest++;
+        src++;
+        n--;
+    }
+    return start;
+}
+Please make sure to replace the _memcpy function in your dynamic.c file with the corrected version. After that, you can recompile the code using the command:
+
+csharp
+Copy code
+gcc -shared -o libdynamic.so dynamic.c
+This should resolve the warning and create the libdynamic.so dynamic library successfully.
+
+
+
+
+
+User
+Let's call C functions from Python
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+I know, you’re missing C when coding in Python. So let’s fix that!
+
+Create a dynamic library that contains C functions that can be called from Python. See example for more detail.
+
+julien@ubuntu:~/0x18$ cat 100-tests.py
+import random
+import ctypes
+
+cops = ctypes.CDLL('./100-operations.so')
+a = random.randint(-111, 111)
+b = random.randint(-111, 111)
+print("{} + {} = {}".format(a, b, cops.add(a, b)))
+print("{} - {} = {}".format(a, b, cops.sub(a, b)))
+print("{} x {} = {}".format(a, b, cops.mul(a, b)))
+print("{} / {} = {}".format(a, b, cops.div(a, b)))
+print("{} % {} = {}".format(a, b, cops.mod(a, b)))
+julien@ubuntu:~/0x16. Doubly linked lists$ python3 100-tests.py 
+66 + -76 = -10
+66 - -76 = 142
+66 x -76 = -5016
+66 / -76 = 0
+66 % -76 = 66
+julien@ubuntu:~/0x18$ python3 100-tests.py 
+-34 + -57 = -91
+-34 - -57 = 23
+-34 x -57 = 1938
+-34 / -57 = 0
+-34 % -57 = -34
+julien@ubuntu:~/0x18$ python3 100-tests.py 
+-5 + -72 = -77
+-5 - -72 = 67
+-5 x -72 = 360
+-5 / -72 = 0
+-5 % -72 = -5
+julien@ubuntu:~/0x18$ python3 100-tests.py 
+39 + -62 = -23
+39 - -62 = 101
+39 x -62 = -2418
+39 / -62 = 0
+39 % -62 = 39
+julien@ubuntu:~/0x18$ 
+
+ChatGPT
+To create a dynamic library containing C functions that can be called from Python, follow these steps:
+
+Step 1: Implement the C functions in a source file
+Create a C source file, for example, 100-operations.c, and implement the functions mentioned in the example. Here's an example implementation:
+
+c
+Copy code
+int add(int a, int b) {
+    return a + b;
+}
+
+int sub(int a, int b) {
+    return a - b;
+}
+
+int mul(int a, int b) {
+    return a * b;
+}
+
+int div(int a, int b) {
+    return a / b;
+}
+
+int mod(int a, int b) {
+    return a % b;
+}
+Step 2: Compile the source file into a dynamic library
+To compile the source file 100-operations.c into a dynamic library 100-operations.so, use the following command:
+
+vbnet
+Copy code
+gcc -shared -o 100-operations.so 100-operations.c
+Make sure you have the necessary development libraries installed on your system, and adjust the command if needed (e.g., adding compiler flags or library paths).
+
+After successful compilation, you should have the 100-operations.so dynamic library file.
+
+Step 3: Use the dynamic library in Python
+Now you can use the dynamic library in Python by loading it using the ctypes module. Here's an example:
+
+python
+Copy code
+import random
+import ctypes
+
+# Load the dynamic library
+cops = ctypes.CDLL('./100-operations.so')
+
+# Generate random numbers
+a = random.randint(-111, 111)
+b = random.randint(-111, 111)
+
+# Call the C functions and print the results
+print("{} + {} = {}".format(a, b, cops.add(a, b)))
+print("{} - {} = {}".format(a, b, cops.sub(a, b)))
+print("{} x {} = {}".format(a, b, cops.mul(a, b)))
+print("{} / {} = {}".format(a, b, cops.div(a, b)))
+print("{} % {} = {}".format(a, b, cops.mod(a, b)))
+Make sure to replace 100-operations.so with the correct path if it's located in a different directory.
+
+That's it! You can now execute the Python script, and it will call the C functions from the dynamic library and print the results based on random numbers generated.
+
+
+
+
+
+User
+To create a dynamic library containing C functions that can be called from Python, follow these steps:
+
+Step 1: Implement the C functions in a source file
+Create a C source file, for example, 100-operations.c, and implement the functions mentioned in the example. Here's an example implementation: >>>add these in betty style comments in c
+
+ChatGPT
+Certainly! Here's the updated code with Betty style comments:
+
+c
+Copy code
+/* 100-operations.c */
+
+/**
+ * add - Adds two integers
+ * @a: First integer
+ * @b: Second integer
+ * Return: Result of addition
+ */
+int add(int a, int b)
+{
+    return a + b;
+}
+
+/**
+ * sub - Subtracts two integers
+ * @a: First integer
+ * @b: Second integer
+ * Return: Result of subtraction
+ */
+int sub(int a, int b)
+{
+    return a - b;
+}
+
+/**
+ * mul - Multiplies two integers
+ * @a: First integer
+ * @b: Second integer
+ * Return: Result of multiplication
+ */
+int mul(int a, int b)
+{
+    return a * b;
+}
+
+/**
+ * div - Divides two integers
+ * @a: First integer
+ * @b: Second integer
+ * Return: Result of division
+ */
+int div(int a, int b)
+{
+    return a / b;
+}
+
+/**
+ * mod - Computes the modulo of two integers
+ * @a: First integer
+ * @b: Second integer
+ * Return: Result of modulo operation
+ */
+int mod(int a, int b)
+{
+    return a % b;
+}
+Please note that these comments follow the general guidelines of the Betty style, but you may need to adjust them to match any specific requirements or variations that you have for the coding style.
+
+Once you have made the necessary adjustments, you can proceed to the next steps to compile the source file into a dynamic library and use it in Python.
+
