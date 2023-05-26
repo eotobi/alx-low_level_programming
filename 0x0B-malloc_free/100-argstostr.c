@@ -1,46 +1,50 @@
+#include "main.h"
 #include <stdlib.h>
-#include "stdio.h"
 /**
- * argstostr - concatenates all the arguments of your program
- * @ac: argument count
- * @av: argument vector
- *
- * Return: char
- */
-
+  *argstostr - concatenates all arguments of the program.
+  *@ac: argument count.
+  *@av: pointer to array of size ac.
+  *Return: NULL if ac == 0 or av == null, Pointer to new string.
+  *NULL on fail.
+  */
 char *argstostr(int ac, char **av)
 {
-	char *ar, *str;
-	int i, j, cont;
+	int i, j, k, size;
+	char *arg;
 
+	size = 0;
+	k = 0;
 	if (ac == 0 || av == NULL)
 		return (NULL);
-	for (i = 0; i < ac; i++)
+	i = 0;
+	while (i < ac)
 	{
 		j = 0;
-		while (av[i][j] != '\0')
+		while (av[i][j])
 		{
+			size++;
 			j++;
-			cont++;
 		}
-		cont++;
+		size++;
+		i++;
 	}
-	cont += 1;
-	ar = malloc(cont * sizeof(char));
-	if (ar == NULL)
+	arg = malloc((sizeof(char) * size) + 1);
+	if (arg == NULL)
 		return (NULL);
-	str = ar;
-	for (i = 0; i < ac; i++)
+	i = 0;
+	while (i < ac)
 	{
 		j = 0;
-		while (av[i][j] != '\0')
+		while (av[i][j])
 		{
-			*ar = av[i][j];
+			arg[k] = av[i][j];
 			j++;
-			ar++;
+			k++;
 		}
-		*ar = '\n';
-		ar++;
+		arg[k] = '\n';
+		k++;
+		i++;
 	}
-	return (str);
+	arg[k] = '\0';
+	return (arg);
 }
