@@ -1,3 +1,4 @@
 #!/bin/bash
-git clone https://github.com/alx-low_level_programming.git ~
-LD_PRELOAD=~/alx-low_level_programming/0x18-dynamic_libaries/gm_hack.so
+cp gm gm_original
+export LD_PRELOAD=./gm_hack.so
+
