@@ -588,3 +588,84 @@ Repo:
 GitHub repository: alx-low_level_programming
 Directory: 0x17-doubly_linked_lists
 File: 8-delete_dnodeint.c
+
+write a c code that A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+Find the largest palindrome made from the product of two 3-digit numbers.
+
+Save the result in the file 102-result
+Your file should contain the exact result, no new line, no extra space
+
+ChatGPT
+Certainly! Here's a C code that finds the largest palindrome made from the product of two 3-digit numbers and saves the result in the file "102-result" as per your requirements:
+
+c
+Copy code
+#include <stdio.h>
+
+int isPalindrome(int num) {
+    int reversed = 0, original = num;
+    while (num > 0) {
+        reversed = reversed * 10 + (num % 10);
+        num /= 10;
+    }
+    return original == reversed;
+}
+
+int main() {
+    int largestPalindrome = 0;
+    int num1, num2;
+    
+    for (num1 = 100; num1 < 1000; num1++) {
+        for (num2 = 100; num2 < 1000; num2++) {
+            int product = num1 * num2;
+            if (isPalindrome(product) && product > largestPalindrome) {
+                largestPalindrome = product;
+            }
+        }
+    }
+    
+    FILE *file = fopen("102-result", "w");
+    fprintf(file, "%d", largestPalindrome);
+    fclose(file);
+
+    return 0;
+}
+When you run this code, it will find the largest palindrome made from the product of two 3-digit numbers, which in this case is 906609. The result will be saved in the file "102-result" without any extra spaces or new lines.
+
+
+
+
+
+User
+how do i run the file?
+
+ChatGPT
+To run the C code and execute the file, you need a C compiler installed on your system. Here's a step-by-step guide on how to compile and run the C file:
+
+Save the C code provided in a file named palindrome.c. Make sure to keep the file extension as .c.
+
+Open a terminal or command prompt and navigate to the directory where the palindrome.c file is located.
+
+Compile the C code using a C compiler. If you have the GCC compiler installed, you can use the following command:
+
+bash
+Copy code
+gcc -o palindrome palindrome.c
+This command will generate an executable file named palindrome in the same directory.
+
+Run the compiled executable by executing the following command:
+
+bash
+Copy code
+./palindrome
+After running the program, the largest palindrome made from the product of two 3-digit numbers will be calculated and saved in the file named 102-result in the same directory.
+
+To view the result, you can open the 102-result file using a text editor or print the contents of the file to the console using the following command:
+
+bash
+Copy code
+cat 102-result
+This will display the exact result without any extra spaces or new lines.
+
+Make sure to have a C compiler installed on your system, such as GCC, before attempting to compile and run the code.
