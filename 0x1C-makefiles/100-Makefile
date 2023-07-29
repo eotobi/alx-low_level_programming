@@ -1,14 +1,28 @@
-CC = gcc
-SRC = main.c holberton.c
-OBJ = $(patsubst %.c,%.o,$(SRC))
-NAME = holberton
-CFLAGS = -Wall -Werror -Wextra -pedantic
-.PHONY : all clean oclean fclean re
-all : m.h $(OBJ)
-    $(CC) $(OBJ) -o $(NAME)
-clean :
-	$(RM) *~ $(NAME)
-oclean :
-	$(RM) $(OBJ)
-fclean : clean oclean
-re : oclean all
+#!/usr/bin/make -f
+
+CC := gcc
+SRC := $(wildcard *.c)
+OBJ := $(SRC:.c=.o)
+NAME := school
+CFLAGS := -Wall -Werror -Wextra -pedantic
+DELETE := \rm -f
+
+.PHONY: all clean fclean oclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $@
+
+$(OBJ): m.h
+
+clean:
+	$(DELETE) $(OBJ) *~ $(NAME) $(SRC:.c=.c~) $(SRC:.c=.h~)
+
+oclean:
+	$(DELETE) $(OBJ)
+
+fclean: oclean clean
+
+re: fclean all
+
