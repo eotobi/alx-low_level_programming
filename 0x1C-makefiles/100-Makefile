@@ -1,5 +1,3 @@
-#!/usr/bin/make -f
-
 CC := gcc
 SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
