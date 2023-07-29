@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+CC := gcc
+SRC := $(wildcard *.c)
+OBJ := $(SRC:.c=.o)
+NAME := school
+CFLAGS := -Wall -Werror -Wextra -pedantic
+
+.PHONY: all clean fclean oclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $@
+
+%.o: %.c m.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	$(RM) $(OBJ) *~ $(NAME)
+
+oclean:
+	$(RM) $(OBJ)
+
+fclean: oclean clean
+
+re: fclean all
+
