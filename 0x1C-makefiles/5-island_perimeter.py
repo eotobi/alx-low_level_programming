@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """5-island_perimeter module"""
 
+
 def island_perimeter(grid):
     """
     Calculate the perimeter of the island described in grid.
@@ -26,13 +27,14 @@ def island_perimeter(grid):
 
     return perimeter
 
+
 if __name__ == "__main__":
     grid = [
         [0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0, 0],
         [0, 1, 0, 0, 0, 0],
         [0, 1, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0],
     ]
     print(island_perimeter(grid))
 
